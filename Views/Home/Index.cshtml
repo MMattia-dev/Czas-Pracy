@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>*@
+<script type="text/javascript" src="~/Scripts/myScripts.js"></script>
+
+<div class="row">
+
+    <div class="sidenav" style="display: none; position: fixed; left: 0; top: 0;">
+        <div id="lock" onclick="lock_click()"></div>
+        <div id="showAll" onclick="showAll_click()"></div>
+        <div style="height: 20px;"></div>
+        <div id="show_depart">
+
+            <div style="display: flex; margin-left: 20px; margin-top: 20px;">
+                <div id="plus1" style="display: block; user-select: none; background-image: url('../../Content/images/plus-symbol-button.png'); background-position: center; background-size: 17px 17px; background-repeat: no-repeat; height: 17px; width: 17px; margin-top: 7px;"></div>
+                <div class="department" onclick="swipe_workers1()">Dział IT</div>
+            </div>
+            <div class="workers" id="it">
+                <div class="worker">Maciej Kowalski</div>
+            </div>
+
+            <div style="display: flex; margin-left: 20px; margin-top: 20px;">
+                <div id="plus2" style="display: block; user-select: none; background-image: url('../../Content/images/plus-symbol-button.png'); background-position: center; background-size: 17px 17px; background-repeat: no-repeat; height: 17px; width: 17px; margin-top: 7px;"></div>
+                <div class="department" onclick="swipe_workers2()">Dział OK</div>
+            </div>
+            <div class="workers" id="ok">
+                <div class="worker">Maciej Kowalski</div>
+            </div>
+
+            <div style="display: flex; margin-left: 20px; margin-top: 20px;">
+                <div id="plus3" style="display: block; user-select: none; background-image: url('../../Content/images/plus-symbol-button.png'); background-position: center; background-size: 17px 17px; background-repeat: no-repeat; height: 17px; width: 17px; margin-top: 7px;"></div>
+                <div class="department" onclick="swipe_workers3()">Dział Ewidencji</div>
+            </div>
+            <div class="workers" id="ew">
+                <div class="worker">Maciej Kowalski</div>
+            </div>
+
+            <div style="display: flex; margin-left: 20px; margin-top: 20px;">
+                <div id="plus4" style="display: block; user-select: none; background-image: url('../../Content/images/plus-symbol-button.png'); background-position: center; background-size: 17px 17px; background-repeat: no-repeat; height: 17px; width: 17px; margin-top: 7px;"></div>
+                <div class="department" onclick="swipe_workers4()">Magazyn</div>
+            </div>
+            <div class="workers" id="mag">
+                <div class="worker">Maciej Kowalski</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidenav-right" style="display: none; position: fixed; right: 0; top: 0;">
+        
+        <div style="margin-top: 20px; margin-left: 10px;" id="sidenav_right_ID">
+            <div style="font-size: 21px; font-family: 'Segoe UI'; letter-spacing: 0.02em; margin-left: 20px; user-select: none;">Wybierz godziny</div>
+            <div style="height: 10px;"></div>
+            <div style="margin-left: 15px;">
+                <div class="preHours" style="">06:00-14:00</div>
+                <div class="preHours" style="">07:00-15:00</div>
+                <div class="preHours" style="">08:00-16:00</div>
+                <div class="preHours" style="">09:00-17:00</div>
+                <div class="preHours" style="">10:00-18:00</div>
+                <div class="preHours" style="">22:00-06:00</div>
+                <div class="preHours" style="">18:00-06:00</div>
+                <div class="preHours" style="">06:00-18:00</div>
+                <div class="preHours" style="">Dodaj...</div>
+            </div>
+            <hr />
+            <div style=" margin-left: 20px;">
+                <div style="font-size: 21px; font-family: 'Segoe UI'; letter-spacing: 0.02em; user-select: none;">Wpisz godziny</div>
+                <input style="margin-left: 0px; margin-top: 15px; font-size: 20px; width: 130px;" type="time" /><span style="font-size: 20px; margin: 0 10px 0 10px;">-</span><input style="margin-left: 0px; margin-top: 15px; font-size: 20px; width: 130px;" type="time" />
+            </div>
+            <hr />
+            <div style=" margin-left: 20px;">
+                <div style="font-size: 21px; font-family: 'Segoe UI'; letter-spacing: 0.02em; user-select: none;">Urlop</div>
+                <select style="margin-top: 10px;  min-width: 287px; font-size: 15px; padding: 8px;">
+                    <option>Urlop macierzyński</option>
+                    <option>Urlop tacierzyński</option>
+                    <option>Zwolnienie chorobowe</option>
+
+                </select>
+                <input type="submit" value="Zastosuj" class="urlopButton"/>
+            </div>
+            
+        </div>
+        
+    </div>
+
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="user-not-detected">
+            <a href="@Url.Action("Register", "Account")">
+                <div class="rl-div">
+                    <img src="~/Content/images/key.png" style="width: 70px; height: 70px;" /><p>Zarejestruj</p>
+                </div>
+            </a>
+
+            <a href="@Url.Action("Login", "Account")">
+                <div class="rl-div">
+                    <img src="~/Content/images/user.png" style="width: 70px; height: 70px;" /><p>Zaloguj</p>
+                </div>
+            </a>
+        </div>
+
+
+    }
+    else
+    {
+        @*<div style="margin-top: 300px; margin-left: 300px;">EHE</div>*@
+        <div class="container">
+            <div class="calendar">
+                <div class="month">
+                    <i class="fas fa-angle-left prev"></i>
+                    <div class="date">
+                        <h1></h1>
+                        <p></p>
+                    </div>
+                    <i class="fas fa-angle-right next"></i>
+                </div>
+                <div class="weekdays">
+                    <div>Pon</div>
+                    <div>Wto</div>
+                    <div>Śro</div>
+                    <div>Czw</div>
+                    <div>Pią</div>
+                    <div>Sob</div>
+                    <div>Nie</div>
+                </div>
+                <div class="days"></div>
+            </div>
+        </div>
+    }
+
+    @*<div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>*@
+</div>
+
+<script type="text/javascript" src="~/Scripts/calendar.js"></script>

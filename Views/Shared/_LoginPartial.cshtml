@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right" style="padding-right:30px;">
+        <li>
+            @*@Html.ActionLink("Witaj," + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+            <a href="#" title="Ustawienia">
+                <img src="~/Content/images/settings.png" style="height: 30px; width: 30px;">
+            </a>
+        </li>
+        <li>
+            @*@Html.ActionLink("Witaj," + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+            <a href="@Url.Action("Index", "Manage")" title="Zarządzaj kontem">
+                <img src="~/Content/images/user.png" style="height: 30px; width: 30px;">
+            </a>
+        </li>
+        @*<li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>*@
+        <li>
+            <a href="javascript:document.getElementById('logoutForm').submit()" title="Wyloguj">
+                <img src="~/Content/images/power-off.png" style="height: 30px; width: 30px;">
+            </a>
+        </li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right" style="padding-right: 15px;">
+        @*<li>@Html.ActionLink("Zarejestruj", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        @*<li>@Html.ActionLink("Zaloguj", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+
+        @*<li>
+            <a href="@Url.Action("Register", "Account")" title="Zarejestruj" style="visibility: hidden;">
+                <img src="~/Content/images/key.png" style="height: 30px; width: 30px;"/>
+            </a>
+        </li>*@
+
+        @*<li>
+            <a href="@Url.Action("Login", "Account")" title="Zaloguj">
+                <img src="~/Content/images/user.png" style="height: 30px; width: 30px;"/>
+            </a>
+        </li>*@
+
+          
+    </ul>
+}
